@@ -6,8 +6,8 @@ http.createServer(function (req, res) {
 
 });
 
-// Next to read the file we could use readFile method or createReadStream method from fs module.
-// we will use readFile method since the file is not big in size.
+// Next to read the file you could use readFile method or createReadStream method from fs module.
+// you can use readFile method since the file is not big in size.
 // if you have file with big size, use createReadStream instead.
 // createFile will take a path, an options and a callback.
 // This code will search a file in root directory /static/hello.html:

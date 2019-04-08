@@ -17,4 +17,4 @@ http.createServer(function (req, res) {
 // Next thing to do is that we currently have three html files in our 
 // public directory. If we look at the console.log(req.url) every time we clicked the
 // link in our navigation bar, we could see the url for every link.
-// Write an if condition to render all three html files for the user.
+// You can use if else condition or switch to render all three html files for the user.

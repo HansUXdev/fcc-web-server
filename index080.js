@@ -4,42 +4,41 @@ const { parse } = require('querystring');
 
 http.createServer(function (req, res) {
    console.log(req.url, req.method);
-   if (req.url === '/'){
-      fs.readFile(__dirname + '/public/index.html', function (err, data) {
-         if (err) throw err;
-         res.write(data);
+   switch (req.url) {
+      case '/':
+         fs.readFile(__dirname + '/public/index.html', function (err, data) {
+            if (err) throw err;
+            res.write(data);
+            res.end();
+         });
+         break;
+      case '/products':
+         fs.readFile(__dirname + '/public/products.html', function (err, data) {
+            if (err) throw err;
+            res.write(data);
+            res.end();
+         });
+         break;
+      case '/about':
+         fs.readFile(__dirname + '/public/about.html', function (err, data) {
+            if (err) throw err;
+            res.write(data);
+            res.end();
+         });
+         break;
+      default:
+         res.statusCode = 404;
+         res.statusMessage = 'Not Found';
+         res.write(res.statusMessage);
          res.end();
-      });
-   } else if (req.url === '/products') {
-      fs.readFile(__dirname + '/public/products.html', function (err, data) {
-         if (err) throw err;
-         res.write(data);
-         res.end();
-      });
-   } else if (req.url === '/about') {
-      fs.readFile(__dirname + '/public/about.html', function (err, data) {
-         if (err) throw err;
-         res.write(data);
-         res.end();
-      });
-   } else {
-      res.statusCode = 404;
-      res.statusMessage = 'Not Found';
-      res.write(res.statusMessage);
-      res.end();
+         break;
    }
 }).listen(8080);
 
-// Now we can handle and parse the form data from use like so:
+// Now we can handle and parse the form data from user like so:
 // if (req.method === 'POST') {
 //    if (req.headers['content-type'] === 'application/x-www-form-urlencoded') {
-//       let body = '';
-//       req.on('data', function (chunk) {
-//          concatenate the body and chunk.
-//       });
-//       req.on('end', function () {
-//          parse body here;
-//          console.log(body);
-//       })
 //    }
 // }
+// Reading the `content-type` keys in headers is to make sure that
+// the data is coming from a form element.

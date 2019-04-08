@@ -3,26 +3,30 @@ const fs = require('fs');
 
 http.createServer(function (req, res) {
    console.log(req.url, req.method);
-   if (req.url === '/'){
-      fs.readFile(__dirname + '/public/index.html', function (err, data) {
-         if (err) throw err;
-         res.write(data);
-         res.end();
-      });
-   } else if (req.url === '/products') {
-      fs.readFile(__dirname + '/public/products.html', function (err, data) {
-         if (err) throw err;
-         res.write(data);
-         res.end();
-      });
-   } else if (req.url === '/about') {
-      fs.readFile(__dirname + '/public/about.html', function (err, data) {
-         if (err) throw err;
-         res.write(data);
-         res.end();
-      });
-   } else {
-      // handle Not Found Page
+   switch (req.url) {
+      case '/':
+         fs.readFile(__dirname + '/public/index.html', function (err, data) {
+            if (err) throw err;
+            res.write(data);
+            res.end();
+         });
+         break;
+      case '/products':
+         fs.readFile(__dirname + '/public/products.html', function (err, data) {
+            if (err) throw err;
+            res.write(data);
+            res.end();
+         });
+         break;
+      case '/about':
+         fs.readFile(__dirname + '/public/about.html', function (err, data) {
+            if (err) throw err;
+            res.write(data);
+            res.end();
+         });
+         break;
+      default:
+         break;
    }
 }).listen(8080);
 
